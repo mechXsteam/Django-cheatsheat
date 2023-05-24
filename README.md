@@ -555,8 +555,7 @@ urlpatterns = [
                 <a href="{% url 'users:login' %}">Log in</a>
             {% endif %}
         </p>
-        {# These pair of tags will act as a placeholder, it is upon the child template
-    		which kind of information goes into #}
+        {# These pair of tags will act as a placeholder, it is upon the child template which kind of information goes into #}
         {% block content %}{% endblock content %}
     
     </body>
@@ -677,10 +676,11 @@ class Topic(models.Model):
 		text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    def__str__(self):
+	"""Return a string representation of the model"""
+	return self.text
 
-def__str__(self):
-"""Return a string representation of the model"""
-return self.text
+
 ```
 
 Migrate the database, as a model is modified.
