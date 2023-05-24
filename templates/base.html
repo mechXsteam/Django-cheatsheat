@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning log</title>
+</head>
+<body>
+    <h1>Welcome hello World !</h1>
+    <p>
+        <a href="{% url 'my_app:index' %}">Home</a>
+        <a href="{% url 'my_app:topic' %}">Topics</a>
+        <a href="{% url 'my_app:new_topic' %}">Add new topic</a>
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}.
+            <a href="{% url 'users:logout' %}">logout</a>
+        {% else %}
+            <a href="{% url 'users:login' %}">Log in</a>
+            <a href="{% url 'users:register' %}">Register</a>
+        {% endif %}
+    </p>
+    {# these pair of tags will act as a placeholder, it is upon the child template which kind of information goes into #}
+    {% block content %}{% endblock content %}
+
+</body>
+</html>

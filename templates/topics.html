@@ -1,0 +1,14 @@
+{# extends the common portion form the base.html such as navigation bar #}
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for topic in topics %}
+            <li><p>{{ topic.date_added|date:'M d, Y'}}</p>
+                <p>{{ topic.text|linebreaks }}</p><a href="{% url 'my_app:entry' topic.id %}">View entries </a><a href="{% url 'my_app:delete_topic' topic.id %}">delete topic</a></li>
+        {% empty %}
+            <li>No topics have been added yet !</li>
+            {# tells django what to do, when there is no item in the list #}
+        {% endfor %}
+    </ul>
+{% endblock content %}
