@@ -76,7 +76,7 @@ class Topic(models.Model):
         return self.text
 ```
 
-1. To view your model in the admin panel, register it in the admin.py file of your app.
+To view your model in the admin panel, register it in the admin.py file of your app.
 
 ```python
 my_app/admin.py
@@ -85,7 +85,6 @@ from django.contrib import admin
 
 from .models import Topic
 # Register your models here.
-
 admin.site.register(Topic)
 ```
 
@@ -186,7 +185,7 @@ templates/index.html
 **Step 3:** Define a view.
 
 ```python
-**my_app/views.py**
+my_app/views.py
 
 from django.shortcuts import render
 
@@ -198,7 +197,7 @@ def viewIndex(request):
 **Step 4:** Define urls of the my_app in the my_app/urls.py file.
 
 ```python
-**my_app/urls.py**
+my_app/urls.py
 
 from django.urls import path
 
@@ -269,7 +268,7 @@ def topics(request):
     """show all topics"""
     topics = Topic.objects.all()
     context = {'topics': topics}
-******    return render(request, 'index.html', context)
+    return render(request, 'index.html', context)
 ```
 
 ```html
@@ -323,7 +322,7 @@ templates/topics.html
 # 10. How to pass an argument in the URLs
 
 ```python
-**my_app/urls.py**
+my_app/urls.py
 
 from django.urls import path
 
@@ -345,7 +344,7 @@ To redirect to such a URL
 
 ```python
 my_app/views.py
-****
+
 def new_entry(request, topic_id):
     """Add a new entry to a topic"""
     topic = Topic.objects.get(id=topic_id)
@@ -463,7 +462,7 @@ templates/new_topic.html
 
 # 12. User authentication and authorization
 
-1. Authentication refers to determining "who you are," while authorization determines "what you can do."
+Authentication refers to determining "who you are," while authorization determines "what you can do."
 
 **Step 1:** Create a user app using the command, python manage.py startapp users.
 
@@ -472,7 +471,7 @@ templates/new_topic.html
 **Step 3:** Include the URL of the user's app.
 
 ```python
-**users/urls.py**
+users/urls.py
 
 from django.contrib import admin
 from django.urls import path, include
@@ -506,7 +505,7 @@ urlpatterns = [
     
     ```html
     users/templates/registration/login.html
-    ****
+
     {% extends 'base.html' %}
     
     {% block content %}
@@ -525,7 +524,7 @@ urlpatterns = [
     
     ```html
     users/templates/registration/logged_out.html
-    ****
+
     {% extends 'base.html' %}
     {% block content %}
         <h1>You have been logout</h1>
@@ -536,7 +535,7 @@ urlpatterns = [
     
     ```html
     templates/base.html
-    ****
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -679,9 +678,9 @@ class Topic(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
-	def__str__(self):
-	"""Return a string representation of the model"""
-			return self.text
+def__str__(self):
+"""Return a string representation of the model"""
+return self.text
 ```
 
 Migrate the database, as a model is modified.
@@ -701,10 +700,10 @@ def new_topic(request):
         # POST data submitted; process data.
         form = TopicForm(data=request.POST)
     if form.is_valid():
-        new_topic = form.save(commit=False)
-        new_topic.owner = request.user
-        new_topic.save()
-        return redirect('my_app:topic')
+	new_topic = form.save(commit=False)
+	new_topic.owner = request.user
+	new_topic.save()
+	return redirect('my_app:topic')
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'new_topic.html', context)
